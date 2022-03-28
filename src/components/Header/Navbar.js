@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import profileImage from "../images/IMG_20190714_182536.jpg";
 import MenuIcon from "@mui/icons-material/Menu";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [user, setUser] = useState(false);
   const [active, setActive] = useState(false);
-  console.log(active);
+  const [activeProfile, setActiveProfile] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <header>
       <nav className="bg-[#AAD1A6]  w-screen flex flex-col items-center">
         <div className="p-5 flex justify-between w-screen items-center lg:w-[1400px]">
           <div className="ml-4 flex">
-            <p className="text-2xl font-semibold text-white">MehBlog</p>
+            <p className="text-2xl font-semibold text-white"><Link to='/'>MehBlog</Link></p>
 
             <input
               className="ml-1 md:ml-6  border-2 border-gray-300 bg-white h-10 px-5 pr-0 md:pr-16 rounded-lg text-sm focus:outline-none"
@@ -23,37 +37,49 @@ function Navbar() {
           <div className="mr-4">
             {user ? (
               <div className="flex justify-center">
-                <a
-                  href="/"
-                  className="text-white hover:text-blue-800 p-2 hidden lg:inline-flex mt-1"
-                >
-                  Home
-                </a>
-                <a
-                  href="/"
-                  className="text-white hover:text-blue-800 p-2 hidden lg:inline-flex mt-1"
-                >
-                  MyPost
-                </a>
-                <button className="hidden mr-2 p-2 bg-yellow-500 rounded border-0 text-white text-center lg:inline-flex">
-                  <span className="mt-1">Create Blog</span>
-                </button>
-                <button className="">
-                  <img
-                    src={profileImage}
-                    alt=""
-                    className="w-12 h-12 border-2 rounded-full border-yellow-400 "
-                  />
-                </button>
+                <div>
+                  <Button
+                    id="demo-positioned-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                    className=""
+                  >
+                    <img
+                      src={profileImage}
+                      alt=""
+                      className="w-12 h-12 border-2 rounded-full border-yellow-400 "
+                    />
+                  </Button>
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}>Home</MenuItem>
+                      <MenuItem onClick={handleClose}>MyBlog</MenuItem>
+                      <MenuItem onClick={handleClose}>CreateBlog</MenuItem>
+                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Menu>
+                </div>
               </div>
             ) : (
               <div className="flex items-center">
                 <button className="hidden p-2 bg-yellow-500 rounded border-0 pl-2 pr-2 mr-2 text-white lg:inline-flex">
                   Create Blog
                 </button>
-                <a href="/" className="font-bold">
-                  Login
-                </a>
+                <Link to='/Login'>Login</Link>
               </div>
             )}
           </div>
@@ -67,21 +93,31 @@ function Navbar() {
               </p>
             </button>
             {active && (
-              <ul >
+              <ul>
                 <li className="py-2">
-                  <span className="ml-3"><a href="/">Links</a></span>
+                  <span className="ml-3">
+                    <a href="/">Links</a>
+                  </span>
                 </li>
                 <li className="py-2">
-                  <span className="ml-3"><a href="/">Links</a></span>
+                  <span className="ml-3">
+                    <a href="/">Links</a>
+                  </span>
                 </li>
                 <li className="py-2">
-                  <span className="ml-3"><a href="/">Links</a></span>
+                  <span className="ml-3">
+                    <a href="/">Links</a>
+                  </span>
                 </li>
                 <li className="py-2">
-                  <span className="ml-3"><a href="/">Links</a></span>
+                  <span className="ml-3">
+                    <a href="/">Links</a>
+                  </span>
                 </li>
                 <li className="py-2">
-                  <span className="ml-3"><a href="/">Links</a></span>
+                  <span className="ml-3">
+                    <a href="/">Links</a>
+                  </span>
                 </li>
               </ul>
             )}
