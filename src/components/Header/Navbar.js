@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import profileImage from "../images/IMG_20190714_182536.jpg";
+import React, { useContext, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../App";
 
 function Navbar() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useContext(UserContext);
+  const profileImage = user.photoURL;
+  console.log(user)
   const [active, setActive] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
 
@@ -35,9 +37,9 @@ function Navbar() {
             />
           </div>
           <div className="mr-4">
-            {user ? (
+            {user.signIn ? (
               <div className="flex justify-center">
-                <div>
+                <div className="flex justify-center items-center">
                   <Button
                     id="demo-positioned-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -51,7 +53,9 @@ function Navbar() {
                       alt=""
                       className="w-12 h-12 border-2 rounded-full border-yellow-400 "
                     />
+                    
                   </Button>
+                  <p className="text-white hidden lg:inline-flex">{user.displayName}</p>
                     <Menu
                       id="demo-positioned-menu"
                       aria-labelledby="demo-positioned-button"

@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../../firebase.config";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { UserContext } from "../../App";
 
 function Login() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const [toggleForm, setToggleForm] = useState(true);
 
-
+  const [user, setUser] = useContext(UserContext);
   const handleGoogleSignup = () => {
+    const signIn=false;
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
@@ -18,7 +20,9 @@ function Login() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
+        const user1 = result.user;
+        const NewUser={...user1,signIn:true};
+        setUser(NewUser);
         // ...
       }).catch((error) => {
         // Handle Errors here.
