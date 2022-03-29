@@ -3,15 +3,21 @@ import { initializeApp } from "firebase/app";
 import firebaseConfig from "../../firebase.config";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Login() {
+  const signIn=false;
+  let navigate = useNavigate(); 
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const [toggleForm, setToggleForm] = useState(true);
 
   const [user, setUser] = useContext(UserContext);
   const handleGoogleSignup = () => {
-    const signIn=false;
+    
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
@@ -22,6 +28,7 @@ function Login() {
         // The signed-in user info.
         const user1 = result.user;
         const NewUser={...user1,signIn:true};
+        navigate("/");
         setUser(NewUser);
         // ...
       }).catch((error) => {
@@ -57,7 +64,7 @@ function Login() {
                 Login
               </button>
               <p className="text-yellow-600">Or</p>
-              <button className="w-full bg-cyan-500 p-2 text-white" onClick={handleGoogleSignup}>
+              <button className="w-full bg-cyan-500 p-2 text-white" onClick={()=>handleGoogleSignup()}>
                 Sign in with google
               </button>
               <button

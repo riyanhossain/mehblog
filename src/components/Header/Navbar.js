@@ -3,10 +3,28 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../../firebase.config";
+import { getAuth, signOut } from "firebase/auth";
 
 function Navbar() {
+  const app = initializeApp(firebaseConfig);
+  let navigate = useNavigate(); 
+
+  const handleSignOut = () => {
+    const auth = getAuth(app);
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      setUser({ signIn: false });
+      navigate("/");
+      
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
   const [user, setUser] = useContext(UserContext);
   const profileImage = user.photoURL;
   console.log(user)
@@ -40,6 +58,9 @@ function Navbar() {
             {user.signIn ? (
               <div className="flex justify-center">
                 <div className="flex justify-center items-center">
+                <button className="hidden p-2 bg-yellow-500 rounded border-0 pl-2 pr-2 mr-2 text-white lg:inline-flex">
+                  Create Blog
+                </button>
                   <Button
                     id="demo-positioned-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -74,15 +95,13 @@ function Navbar() {
                       <MenuItem onClick={handleClose}>Home</MenuItem>
                       <MenuItem onClick={handleClose}>MyBlog</MenuItem>
                       <MenuItem onClick={handleClose}>CreateBlog</MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      <MenuItem onClick={() => {handleClose();handleSignOut()}}>Logout</MenuItem>
                     </Menu>
                 </div>
               </div>
             ) : (
               <div className="flex items-center">
-                <button className="hidden p-2 bg-yellow-500 rounded border-0 pl-2 pr-2 mr-2 text-white lg:inline-flex">
-                  Create Blog
-                </button>
+
                 <Link to='/Login'>Login</Link>
               </div>
             )}
