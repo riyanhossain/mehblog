@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
-
-  let navigate = useNavigate(); 
-  const [articles, setArticles] = useState([]);
-  console.log(articles);
-  useEffect(()=>{
-    fetch('http://localhost:5000/blogs')
-    .then(res => res.json())
-    .then(data => {
-      setArticles(data)
-    })
-  },[])
+function Programming() {
+    let navigate = useNavigate(); 
+    const [articles, setArticles] = useState([]);
+    console.log(articles);
+    useEffect(()=>{
+      fetch('http://localhost:5000/programming')
+      .then(res => res.json())
+      .then(data => {
+        setArticles(data)
+      })
+    },[])
   return (
     <section>
-      <div className='flex justify-center items-center'> 
-      <div className=' flex flex-col justify-center items-center gap-y-6 mt-6'>
-        {
+    <div className='container flex justify-center items-center'> 
+    <div className='w-4/5 flex flex-col justify-center items-center gap-y-6 mt-6'>
+      {
                     articles.map(item => 
                       <div className='w-[350px] lg:w-[700px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm'>
                         <div className=' flex justify-center'>
@@ -30,13 +29,13 @@ function Home() {
                         </div>
                       </div>
                       )
-        }
+      }
 
-      </div>
-      </div>
-      
-    </section>
+    </div>
+    </div>
+    
+  </section>
   )
 }
 
-export default Home
+export default Programming

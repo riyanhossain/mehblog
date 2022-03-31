@@ -4,21 +4,32 @@ import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
 import Login from "./components/Login/Login";
 import { createContext, useState } from "react";
 import Home from "./components/Home/Home";
+import Article from "./components/Home/Article";
+import Createblog from "./components/CreateBlog/Createblog";
+import Tech from "./components/Categories/Tech";
+import Programming from "./components/Categories/Programming";
 
 export const UserContext = createContext();
 function App() {
   const [user, setUser] = useState([]);
   return (
     <UserContext.Provider value={[user, setUser]}>
-      <main className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <BrowserRouter>
           <Navbar />
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/Login" element={<Login />} />
+            <Route path="/article/:id" element={<Article />} />
+            <Route path="/createblog" element={<Createblog />} />
+            <Route path="/tech" element={<Tech />} />
+            <Route path="/programming" element={<Programming/>} />
+            <Route path="/tech" element={<Tech />} />
+            <Route path="/tech" element={<Tech />} />
+            <Route path="/tech" element={<Tech />} />
           </Routes>
         </BrowserRouter>
-      </main>
+      </div>
     </UserContext.Provider>
   );
 }
