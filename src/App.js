@@ -8,6 +8,9 @@ import Article from "./components/Home/Article";
 import Createblog from "./components/CreateBlog/Createblog";
 import Tech from "./components/Categories/Tech";
 import Programming from "./components/Categories/Programming";
+import AI from "./components/Categories/AI";
+import Machinelearning from "./components/Categories/Machinelearning";
+import Blockchain from "./components/Categories/Blockchain";
 
 export const UserContext = createContext();
 function App() {
@@ -24,9 +27,9 @@ function App() {
             <Route path="/createblog" element={<Createblog />} />
             <Route path="/tech" element={<Tech />} />
             <Route path="/programming" element={<Programming/>} />
-            <Route path="/tech" element={<Tech />} />
-            <Route path="/tech" element={<Tech />} />
-            <Route path="/tech" element={<Tech />} />
+            <Route path="/ai" element={<AI />} />
+            <Route path="/machinelearning" element={<Machinelearning />} />
+            <Route path="/blockchain" element={<Blockchain />} />
           </Routes>
         </BrowserRouter>
       </div>

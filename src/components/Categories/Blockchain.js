@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
-
-  let navigate = useNavigate(); 
-  const [articles, setArticles] = useState([]);
-  console.log(articles);
-  useEffect(()=>{
-    fetch('http://localhost:5000/blogs')
-    .then(res => res.json())
-    .then(data => {
-      setArticles(data)
-    })
-  },[])
+function Blockchain() {
+    let navigate = useNavigate(); 
+    const [articles, setArticles] = useState([]);
+    console.log(articles);
+    useEffect(()=>{
+      fetch('http://localhost:5000/blockchain')
+      .then(res => res.json())
+      .then(data => {
+        setArticles(data)
+      })
+    },[])
   return (
     <section>
-      <div className='flex justify-center items-center'> 
-      <div className=' flex flex-col justify-center items-center gap-y-6 mt-6'>
-        {
+    <div className='container flex justify-center items-center'> 
+    <div className='w-4/5 flex flex-col justify-center items-center gap-y-6 mt-6'>
+      {
                     articles.map(item => 
                       <div className='w-[350px] lg:w-[700px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm'>
                         <div className=' flex justify-center'>
@@ -25,18 +24,18 @@ function Home() {
                         </div>
                         <div className='flex flex-col gap-y-4 w-11/12 mt-5 mb-5'>
                           <a href="/" className='text-xl'>{item.title}</a>
-                          <p className=''>{item.description}...<span><button className='text-lime-600' onClick={() => navigate(`/article/${item._id}`)}>"Read more"</button></span></p>
+                          <p className=''>{item.description}...<span><button className='text-lime-600' onClick={() => navigate(`/article/${item.id}`)}>"Read more"</button></span></p>
                           
                         </div>
                       </div>
                       )
-        }
+      }
 
-      </div>
-      </div>
-      
-    </section>
+    </div>
+    </div>
+    
+  </section>
   )
 }
 
-export default Home
+export default Blockchain

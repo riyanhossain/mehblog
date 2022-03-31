@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Article() {
-  const [article, setArticle] = useState([]);
-  let { id } = useParams();
-  console.log(article.imageUrl);
+function Machinelearning() {
+  let navigate = useNavigate();
+  const [articles, setArticles] = useState([]);
+  console.log(articles);
   useEffect(() => {
-    fetch("http://localhost:5000/article/" + id)
+    fetch("http://localhost:5000/machinelearning")
       .then((res) => res.json())
       .then((data) => {
-        setArticle(data);
+        setArticles(data);
       });
-  },[]);
+  }, []);
   return (
     <section>
       <div className="container flex justify-center items-center">
         <div className="w-4/5 flex flex-col justify-center items-center gap-y-6 mt-6">
-          {article.map((item) => (
+          {articles.map((item) => (
             <div className="w-[350px] lg:w-[700px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm">
               <div className=" flex justify-center">
                 <img
@@ -26,11 +26,19 @@ function Article() {
                 />
               </div>
               <div className="flex flex-col gap-y-4 w-11/12 mt-5 mb-5">
-                <p className="text-xl">
+                <a href="/" className="text-xl">
                   {item.title}
-                </p>
+                </a>
                 <p className="">
-                  {item.description}
+                  {item.description}...
+                  <span>
+                    <button
+                      className="text-lime-600"
+                      onClick={() => navigate(`/article/${item.id}`)}
+                    >
+                      "Read more"
+                    </button>
+                  </span>
                 </p>
               </div>
             </div>
@@ -41,4 +49,4 @@ function Article() {
   );
 }
 
-export default Article;
+export default Machinelearning;

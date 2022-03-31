@@ -140,7 +140,7 @@ function Navbar() {
                   <Link to="/ai">AI</Link>
                 </li>
                 <li className="py-2 ml-3">
-                  <Link to="/machingLearning">Maching Learning</Link>
+                  <Link to="/machinelearning">Maching Learning</Link>
                 </li>
                 <li className="py-2 ml-3">
                   <Link to="/blockchain">Blockchain</Link>
@@ -157,7 +157,7 @@ function Navbar() {
           <Link to="/ai" className="p-2 hidden lg:inline-flex hover:text-lime-500">
             AI
           </Link>
-          <Link to="/machingLearning" className="p-2 hidden lg:inline-flex hover:text-lime-500">
+          <Link to="/machinelearning" className="p-2 hidden lg:inline-flex hover:text-lime-500">
             Maching Learning
           </Link>
           <Link to="/blockchain" className="p-2 hidden lg:inline-flex hover:text-lime-500">
