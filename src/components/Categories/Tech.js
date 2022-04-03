@@ -24,8 +24,7 @@ function Tech() {
                           </div>
                           <div className='flex flex-col gap-y-4 w-11/12 mt-5 mb-5'>
                             <a href="/" className='text-xl'>{item.title}</a>
-                            <p className=''>{item.description}...<span><button className='text-lime-600' onClick={() => navigate(`/article/${item.id}`)}>"Read more"</button></span></p>
-                            
+                            <p className=''>{item.description.slice(0,100)}...<span><button className='text-lime-600' onClick={() => navigate(`/article/${item.id}`)}>"Read more"</button></span></p>
                           </div>
                         </div>
                         )

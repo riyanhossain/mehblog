@@ -28,7 +28,6 @@ function Navbar() {
 
   const [user, setUser] = useContext(UserContext);
   const profileImage = user.photoURL;
-  console.log(user);
   const [active, setActive] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
 

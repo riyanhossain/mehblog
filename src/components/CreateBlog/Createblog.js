@@ -13,7 +13,8 @@ function Createblog() {
     blogger: user.displayName,
     bloggerMail: user.email,
     category:'',
-    date: new Date().toLocaleDateString().split(',')[0]
+    date: new Date().toLocaleDateString().split(',')[0],
+    comments:[]
   })
   const handleSubmit = (e) => {
     e.preventDefault();
