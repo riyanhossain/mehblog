@@ -30,6 +30,7 @@ function Login() {
         const NewUser={...user1,signIn:true};
         navigate("/");
         setUser(NewUser);
+        localStorage.setItem('user', JSON.stringify(NewUser));
         // ...
       }).catch((error) => {
         // Handle Errors here.
@@ -42,6 +43,7 @@ function Login() {
         // ...
       });
   };
+
   return (
     <section>
       <div className="w-screen flex justify-center items-center">

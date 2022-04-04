@@ -61,7 +61,7 @@ function Article() {
                 <p className="text-xl">
                   {item.title}
                 </p>
-                <p className="">
+                <p className="support-line-break">
                   {item.description}
                 </p>
               </div>

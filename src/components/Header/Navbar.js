@@ -12,24 +12,31 @@ import { getAuth, signOut } from "firebase/auth";
 function Navbar() {
   const app = initializeApp(firebaseConfig);
   let navigate = useNavigate();
+  const [user, setUser] = useContext(UserContext);
 
   const handleSignOut = () => {
+
     const auth = getAuth(app);
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        setUser({ signIn: false });
+        setUser({signIn:false});
+
+        localStorage.setItem('user', JSON.stringify(user));
+
         navigate("/");
+
+        
       })
       .catch((error) => {
         // An error happened.
+        console.log(error);
       });
   };
+  const userLocal=JSON.parse(localStorage.getItem('user'));
 
-  const [user, setUser] = useContext(UserContext);
-  const profileImage = user.photoURL;
+  const profileImage = user.photoURL ? user.photoURL : userLocal.photoURL;
   const [active, setActive] = useState(false);
-  const [activeProfile, setActiveProfile] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -39,6 +46,10 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const routeChange = (route) => {
+    navigate(route);
+  }
 
   return (
     <header>
@@ -57,7 +68,7 @@ function Navbar() {
             />
           </div>
           <div className="mr-4">
-            {user.signIn ? (
+            {(user.signIn || userLocal.signIn) ? (
               <div className="flex justify-center">
                 <div className="flex justify-center items-center">
                   <button
@@ -81,7 +92,7 @@ function Navbar() {
                     />
                   </Button>
                   <p className="text-white hidden lg:inline-flex">
-                    {user.displayName}
+                    {user.displayName? user.displayName : userLocal.displayName}
                   </p>
                   <Menu
                     id="demo-positioned-menu"
@@ -98,13 +109,22 @@ function Navbar() {
                       horizontal: "left",
                     }}
                   >
-                    <MenuItem onClick={handleClose}>Home</MenuItem>
-                    <MenuItem onClick={handleClose}>MyBlog</MenuItem>
-                    <MenuItem onClick={handleClose}>CreateBlog</MenuItem>
+                    <MenuItem onClick={() => {
+                        handleClose();
+                        routeChange("/");                      
+                      }}>Home</MenuItem>
+                    <MenuItem onClick={() => {
+                        handleClose();
+                        routeChange("/myblogs");                      
+                      }}>MyBlogs</MenuItem>
+                    <MenuItem onClick={() => {
+                        handleClose();
+                        routeChange("/createblog");                      
+                      }}>CreateBlog</MenuItem>
                     <MenuItem
                       onClick={() => {
                         handleClose();
-                        handleSignOut();
+                        handleSignOut();                      
                       }}
                     >
                       Logout

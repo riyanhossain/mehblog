@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import '../../App.css';
 
 function Createblog() {
 
@@ -36,7 +37,7 @@ function Createblog() {
     value = e.target.value;
     setBlog({ ...blog, [name]: value });
   }
-
+  console.log(blog)
   return (
     <section>
       <div className="w-screen flex justify-center items-center mt-5">
