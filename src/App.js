@@ -11,6 +11,7 @@ import Programming from "./components/Categories/Programming";
 import AI from "./components/Categories/AI";
 import Machinelearning from "./components/Categories/Machinelearning";
 import Blockchain from "./components/Categories/Blockchain";
+import Myblogs from "./components/Header/MyBlogs/Myblogs";
 
 export const UserContext = createContext();
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/ai" element={<AI />} />
             <Route path="/machinelearning" element={<Machinelearning />} />
             <Route path="/blockchain" element={<Blockchain />} />
+            <Route path="/myblogs" element={<Myblogs/>} />
           </Routes>
         </BrowserRouter>
       </div>

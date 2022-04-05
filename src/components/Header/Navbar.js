@@ -51,6 +51,7 @@ function Navbar() {
     navigate(route);
   }
 
+  console.log(userLocal);
   return (
     <header>
       <nav className="bg-[#AAD1A6]  w-screen flex flex-col items-center">
@@ -115,7 +116,14 @@ function Navbar() {
                       }}>Home</MenuItem>
                     <MenuItem onClick={() => {
                         handleClose();
-                        routeChange("/myblogs");                      
+                        routeChange("/myblogs");
+                        fetch('http://localhost:5000/myblog', {
+                          method: 'POST',
+                          headers: {'Content-type' : 'application/json'},
+                          body : JSON.stringify(userLocal)
+                      })
+                      .then(res => res.json())
+                      .then(data=> console.log(data))                      
                       }}>MyBlogs</MenuItem>
                     <MenuItem onClick={() => {
                         handleClose();

@@ -54,7 +54,7 @@ function Article() {
                 <img
                   src={item.imageUrl}
                   alt=""
-                  className="w-full lg:w-[800px] h-[220px] lg:h-[280px]"
+                  className="w-full lg:w-[800px] h-[220px] lg:h-[360px]"
                 />
               </div>
               <div className="flex flex-col gap-y-4 w-11/12 mt-5 mb-5">

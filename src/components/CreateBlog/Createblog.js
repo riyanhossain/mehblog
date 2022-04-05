@@ -7,12 +7,14 @@ function Createblog() {
 
   const navigate = useNavigate();
   const [user, setUser] = useContext(UserContext);
+
+  const userLocal=JSON.parse(localStorage.getItem('user'));
   const [blog, setBlog] =useState({
     title: "",
     imageUrl: "",
     description: "",
-    blogger: user.displayName,
-    bloggerMail: user.email,
+    blogger: user.displayName? user.displayName:userLocal.displayName,
+    bloggerMail: user.email? user.email:userLocal.email,
     category:'',
     date: new Date().toLocaleDateString().split(',')[0],
     comments:[]
