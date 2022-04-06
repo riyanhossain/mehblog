@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 function Blockchain() {
     let navigate = useNavigate(); 
     const [articles, setArticles] = useState([]);
-    console.log(articles);
+
     useEffect(()=>{
-      fetch('http://localhost:5000/blockchain')
+      fetch('https://mehblog.herokuapp.com/blockchain')
       .then(res => res.json())
       .then(data => {
         setArticles(data)

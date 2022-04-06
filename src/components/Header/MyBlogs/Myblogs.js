@@ -8,7 +8,7 @@ function Myblogs() {
     const [articles, setArticles] = useState([]);
     console.log(articles);
     useEffect(()=>{
-      fetch('http://localhost:5000/myblogs')
+      fetch('https://mehblog.herokuapp.com/myblogs')
       .then(res => res.json())
       .then(data => {
         setArticles(data)

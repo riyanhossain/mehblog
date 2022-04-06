@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 function Machinelearning() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
-  console.log(articles);
+
   useEffect(() => {
-    fetch("http://localhost:5000/machinelearning")
+    fetch("https://mehblog.herokuapp.com/machinelearning")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

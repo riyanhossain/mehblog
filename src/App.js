@@ -13,13 +13,14 @@ import Machinelearning from "./components/Categories/Machinelearning";
 import Blockchain from "./components/Categories/Blockchain";
 import Myblogs from "./components/Header/MyBlogs/Myblogs";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Footer from "./components/Footer/Footer";
 
 export const UserContext = createContext();
 function App() {
   const [user, setUser] = useState([]);
   return (
-    <UserContext.Provider value={[user, setUser]}>
-      <div className="flex flex-col justify-center items-center">
+    <UserContext.Provider value={[user, setUser]} >
+      
         <BrowserRouter>
           <Navbar />
           <Routes>
@@ -38,8 +39,9 @@ function App() {
             </Route>
 
           </Routes>
+          <Footer/>
         </BrowserRouter>
-      </div>
+      
     </UserContext.Provider>
   );
 }

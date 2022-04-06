@@ -6,7 +6,7 @@ function Home() {
   let navigate = useNavigate(); 
   const [articles, setArticles] = useState([]);
   useEffect(()=>{
-    fetch('http://localhost:5000/blogs')
+    fetch('https://mehblog.herokuapp.com/blogs')
     .then(res => res.json())
     .then(data => {
       setArticles(data)
@@ -14,13 +14,13 @@ function Home() {
   },[])
   return (
     <section>
-      <div className='flex justify-center items-center'> 
+      <div className='flex justify-center items-center w-screen'> 
       <div className=' flex flex-col justify-center items-center gap-y-6 mt-6'>
         {
                     [...articles].reverse().slice(0,10).map(item => 
-                      <div className='w-[350px] lg:w-[700px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm'>
+                      <div className='w-[350px] lg:w-[800px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm'>
                         <div className=' flex justify-center'>
-                        <img src={item.imageUrl} alt="" className='w-full lg:w-[800px] h-[220px] lg:h-[360px]'/>
+                        <img src={item.imageUrl} alt="" className='w-screen h-[220px] lg:h-[360px]'/>
                         </div>
                         <div className='flex flex-col gap-y-4 w-11/12 mt-5 mb-5'>
                           <a href="/" className='text-xl'>{item.title}</a>

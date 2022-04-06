@@ -50,8 +50,6 @@ function Navbar() {
   const routeChange = (route) => {
     navigate(route);
   }
-
-  console.log(userLocal);
   return (
     <header>
       <nav className="bg-[#AAD1A6]  w-screen flex flex-col items-center">
@@ -117,7 +115,7 @@ function Navbar() {
                     <MenuItem onClick={() => {
                         handleClose();
                         routeChange("/myblogs");
-                        fetch('http://localhost:5000/myblog', {
+                        fetch('https://mehblog.herokuapp.com/myblog', {
                           method: 'POST',
                           headers: {'Content-type' : 'application/json'},
                           body : JSON.stringify(userLocal)
