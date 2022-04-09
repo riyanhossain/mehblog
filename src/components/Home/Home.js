@@ -10,7 +10,7 @@ function Home() {
       .then((data) => {
         setArticles(data);
       });
-  }, []);
+  });
   return (
     <section>
       <div className="flex justify-center items-center w-screen">
