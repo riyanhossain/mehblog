@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Blockchain() {
   let navigate = useNavigate();
@@ -26,9 +26,9 @@ function Blockchain() {
                 />
               </div>
               <div className="flex flex-col gap-y-4 w-11/12 mt-5 mb-5">
-                <a href={`/article/${item._id}`} className="text-xl">
-                  {item.title}
-                </a>
+              <Link to={`/article/${item._id}`} className="text-xl">
+                    {item.title}
+                  </Link>
                 <p className="">
                   {item.description.slice(0, 100)}...
                   <span>
