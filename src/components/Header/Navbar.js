@@ -57,12 +57,12 @@ function Navbar() {
               <Link to="/">MehBlog</Link>
             </p>
 
-            <input
+            {/* <input
               className="ml-1 md:ml-6  border-2 border-gray-300 bg-white h-10 px-5 pr-0 md:pr-16 rounded-lg text-sm focus:outline-none"
               type="search"
               name="search"
               placeholder="Search"
-            />
+            /> */}
           </div>
           <div className="mr-4">
             {(user.signIn || userLocal.signIn) ? (
