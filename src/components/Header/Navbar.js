@@ -15,27 +15,24 @@ function Navbar() {
   const [user, setUser] = useContext(UserContext);
 
   const handleSignOut = () => {
-
     const auth = getAuth(app);
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        setUser({signIn:false});
+        setUser({ signIn: false });
 
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user));
 
         navigate("/");
-
-        
       })
       .catch((error) => {
         // An error happened.
         console.log(error);
       });
   };
-  const userLocal=JSON.parse(localStorage.getItem('user'));
+  const userLocal = JSON.parse(localStorage.getItem("user"));
 
-  const profileImage = user.photoURL ? user.photoURL : userLocal.photoURL;
+  const profileImage = user.photoURL;
   const [active, setActive] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -49,7 +46,7 @@ function Navbar() {
 
   const routeChange = (route) => {
     navigate(route);
-  }
+  };
   return (
     <header>
       <nav className="bg-[#AAD1A6]  w-screen flex flex-col items-center">
@@ -67,7 +64,7 @@ function Navbar() {
             />
           </div>
           <div className="mr-4">
-            {(user.signIn || userLocal.signIn) ? (
+            {user.signIn ? (
               <div className="flex justify-center">
                 <div className="flex justify-center items-center">
                   <button
@@ -91,7 +88,9 @@ function Navbar() {
                     />
                   </Button>
                   <p className="text-white hidden lg:inline-flex">
-                    {user.displayName? user.displayName : userLocal.displayName}
+                    {user.displayName
+                      ? user.displayName
+                      : userLocal.displayName}
                   </p>
                   <Menu
                     id="demo-positioned-menu"
@@ -108,29 +107,41 @@ function Navbar() {
                       horizontal: "left",
                     }}
                   >
-                    <MenuItem onClick={() => {
-                        handleClose();
-                        routeChange("/");                      
-                      }}>Home</MenuItem>
-                    <MenuItem onClick={() => {
-                        handleClose();
-                        routeChange("/myblogs");
-                        fetch('https://mehblog.herokuapp.com/myblog', {
-                          method: 'POST',
-                          headers: {'Content-type' : 'application/json'},
-                          body : JSON.stringify(userLocal)
-                      })
-                      .then(res => res.json())
-                      .then(data=> console.log(data))                      
-                      }}>MyBlogs</MenuItem>
-                    <MenuItem onClick={() => {
-                        handleClose();
-                        routeChange("/createblog");                      
-                      }}>CreateBlog</MenuItem>
                     <MenuItem
                       onClick={() => {
                         handleClose();
-                        handleSignOut();                      
+                        routeChange("/");
+                      }}
+                    >
+                      Home
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        routeChange("/myblogs");
+                        fetch("https://mehblog.herokuapp.com/myblog", {
+                          method: "POST",
+                          headers: { "Content-type": "application/json" },
+                          body: JSON.stringify(userLocal),
+                        })
+                          .then((res) => res.json())
+                          .then((data) => console.log(data));
+                      }}
+                    >
+                      MyBlogs
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        routeChange("/createblog");
+                      }}
+                    >
+                      CreateBlog
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        handleSignOut();
                       }}
                     >
                       Logout
@@ -173,19 +184,34 @@ function Navbar() {
               </ul>
             )}
           </div>
-          <Link to="/tech" className="p-2 hidden lg:inline-flex hover:text-lime-500">
+          <Link
+            to="/tech"
+            className="p-2 hidden lg:inline-flex hover:text-lime-500"
+          >
             Tech
           </Link>
-          <Link to="/programming" className="p-2 hidden lg:inline-flex hover:text-lime-500">
+          <Link
+            to="/programming"
+            className="p-2 hidden lg:inline-flex hover:text-lime-500"
+          >
             Programming
           </Link>
-          <Link to="/ai" className="p-2 hidden lg:inline-flex hover:text-lime-500">
+          <Link
+            to="/ai"
+            className="p-2 hidden lg:inline-flex hover:text-lime-500"
+          >
             AI
           </Link>
-          <Link to="/machinelearning" className="p-2 hidden lg:inline-flex hover:text-lime-500">
+          <Link
+            to="/machinelearning"
+            className="p-2 hidden lg:inline-flex hover:text-lime-500"
+          >
             Maching Learning
           </Link>
-          <Link to="/blockchain" className="p-2 hidden lg:inline-flex hover:text-lime-500">
+          <Link
+            to="/blockchain"
+            className="p-2 hidden lg:inline-flex hover:text-lime-500"
+          >
             Blockchain
           </Link>
         </div>

@@ -5,11 +5,9 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Login() {
-  const signIn=false;
-  let navigate = useNavigate(); 
+  const signIn = false;
+  let navigate = useNavigate();
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -17,7 +15,6 @@ function Login() {
 
   const [user, setUser] = useContext(UserContext);
   const handleGoogleSignup = () => {
-    
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
@@ -27,12 +24,13 @@ function Login() {
         const token = credential.accessToken;
         // The signed-in user info.
         const user1 = result.user;
-        const NewUser={...user1,signIn:true};
+        const NewUser = { ...user1, signIn: true };
         navigate("/");
         setUser(NewUser);
-        localStorage.setItem('user', JSON.stringify(NewUser));
+        localStorage.setItem("user", JSON.stringify(NewUser));
         // ...
-      }).catch((error) => {
+      })
+      .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -66,7 +64,10 @@ function Login() {
                 Login
               </button>
               <p className="text-yellow-600">Or</p>
-              <button className="w-full bg-cyan-500 p-2 text-white" onClick={()=>handleGoogleSignup()}>
+              <button
+                className="w-full bg-cyan-500 p-2 text-white"
+                onClick={() => handleGoogleSignup()}
+              >
                 Sign in with google
               </button>
               <button

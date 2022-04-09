@@ -11,9 +11,9 @@ import Programming from "./components/Categories/Programming";
 import AI from "./components/Categories/AI";
 import Machinelearning from "./components/Categories/Machinelearning";
 import Blockchain from "./components/Categories/Blockchain";
-import Myblogs from "./components/Header/MyBlogs/Myblogs";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Footer from "./components/Footer/Footer";
+import Myblogs from "./components/MyBlogs/Myblogs";
 
 export const UserContext = createContext();
 function App() {

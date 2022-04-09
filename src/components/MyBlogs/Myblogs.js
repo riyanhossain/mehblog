@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
-function AI() {
+function Myblogs() {
+  const [user, setUser] = useContext(UserContext);
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
+  console.log(articles);
   useEffect(() => {
-    fetch("https://mehblog.herokuapp.com/ai")
+    fetch("https://mehblog.herokuapp.com/myblogs")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
       });
   }, []);
+  //post
+
   return (
     <section>
       <div className="container flex justify-center items-center">
@@ -48,4 +53,4 @@ function AI() {
   );
 }
 
-export default AI;
+export default Myblogs;
