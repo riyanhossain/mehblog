@@ -21,7 +21,7 @@ function Navbar() {
         // Sign-out successful.
         setUser({ signIn: false });
 
-        localStorage.setItem("user", JSON.stringify(user));
+        window.localStorage.setItem("user", JSON.stringify(user));
 
         navigate("/");
       })
@@ -30,10 +30,11 @@ function Navbar() {
         console.log(error);
       });
   };
-  const userLocal = JSON.parse(localStorage.getItem("user"));
+  const userLocal = JSON.parse(window.localStorage.getItem("user"));
 
-  const profileImage = user.photoURL;
+  const profileImage = user.photoURL ? user.photoURL : userLocal.photoURL;
   const [active, setActive] = useState(false);
+  console.log(profileImage);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -64,7 +65,7 @@ function Navbar() {
             />
           </div>
           <div className="mr-4">
-            {user.signIn ? (
+            {(user.signIn || userLocal.signIn) ? (
               <div className="flex justify-center">
                 <div className="flex justify-center items-center">
                   <button

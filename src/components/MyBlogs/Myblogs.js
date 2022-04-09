@@ -13,7 +13,7 @@ function Myblogs() {
       .then((data) => {
         setArticles(data);
       });
-  }, []);
+  });
   //post
 
   return (
