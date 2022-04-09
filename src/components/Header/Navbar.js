@@ -21,7 +21,7 @@ function Navbar() {
         // Sign-out successful.
         setUser({ signIn: false });
 
-        window.localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user));
 
         navigate("/");
       })
@@ -30,7 +30,7 @@ function Navbar() {
         console.log(error);
       });
   };
-  const userLocal = JSON.parse(window.localStorage.getItem("user"));
+  const userLocal = JSON.parse(localStorage.getItem("user")) || {};
 
   const profileImage = user.photoURL ? user.photoURL : userLocal.photoURL;
   const [active, setActive] = useState(false);
