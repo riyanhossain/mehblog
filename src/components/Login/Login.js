@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../../firebase.config";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,9 @@ function Login() {
   const handleGoogleSignup = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
+
+    
+
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -42,27 +45,62 @@ function Login() {
       });
   };
 
+  const [emailUser, setEmailUser] = useState({
+    email: "",
+    password: "",
+  });
+  const handleEmailSignIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, emailUser.email, emailUser.password)
+  .then((userCredential) => {
+    // Signed in 
+    const user1 = userCredential.user;
+    navigate("/");
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+
+  }
+  let name, value;
+  const handleEmailLogin = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setEmailUser({ ...emailUser, [name]: value });
+  }
   return (
     <section>
       <div className="w-screen flex justify-center items-center">
-        <div className="bg-gray-200 w-4/5 h-[400px] flex justify-center items-center lg:w-1/4">
+        <div className="bg-gray-200 w-4/5 h-[480px] flex justify-center items-center lg:w-1/4 mt-4">
           {toggleForm ? (
             <div className="w-4/5 justify-center flex flex-col items-center gap-y-3">
               <p className="font-bold text-xl text-cyan-500">Login</p>
+              <form action="" onSubmit={handleEmailSignIn} className='flex flex-col items-center gap-y-3 w-full'>
               <input
                 type="email"
                 placeholder="Email"
                 className="w-full p-2 outline-cyan-500"
+                name="email"
+                value={emailUser.email}
+                required
+                onChange={handleEmailLogin}
               />
               <input
-                type="Email"
+                type="password"
                 placeholder="Password"
                 className="w-full p-2 outline-cyan-500"
+                name="password"
+                value={emailUser.password}
+                required
+                onChange={handleEmailLogin}
               />
 
-              <button className="w-full bg-cyan-500 p-2 text-white">
+              <button type="submit" className="w-full bg-cyan-500 p-2 text-white">
                 Login
               </button>
+              </form>
               <p className="text-yellow-600">Or</p>
               <button
                 className="w-full bg-cyan-500 p-2 text-white"
@@ -79,7 +117,17 @@ function Login() {
             </div>
           ) : (
             <div className="w-4/5 justify-center flex flex-col items-center gap-y-3">
-              <p className="font-bold text-xl text-cyan-500">Login</p>
+              <p className="font-bold text-xl text-cyan-500">Sign Up</p>
+              <input
+                type="text"
+                placeholder="Name"
+                className="w-full p-2 outline-cyan-500"
+              />
+              <input
+                type="text"
+                placeholder="PhotoURL"
+                className="w-full p-2 outline-cyan-500"
+              />
               <input
                 type="email"
                 placeholder="Email"

@@ -17,7 +17,9 @@ import Myblogs from "./components/MyBlogs/Myblogs";
 
 export const UserContext = createContext();
 function App() {
-  const [user, setUser] = useState([]);
+  const userLocal = JSON.parse(localStorage.getItem("user")) || {};
+  const [user, setUser] = useState(userLocal);
+  console.log(user)
   return (
     <UserContext.Provider value={[user, setUser]} >
       

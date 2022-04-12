@@ -15,13 +15,14 @@ function Navbar() {
   const [user, setUser] = useContext(UserContext);
 
   const handleSignOut = () => {
+
+    console.log(user)
     const auth = getAuth(app);
     signOut(auth)
       .then(() => {
         // Sign-out successful.
         setUser({ signIn: false });
-
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify({ signIn: false }));
 
         navigate("/");
       })
@@ -30,11 +31,11 @@ function Navbar() {
         console.log(error);
       });
   };
-  const userLocal = JSON.parse(localStorage.getItem("user")) || {};
+  // const userLocal = JSON.parse(localStorage.getItem("user")) || {};
 
-  const profileImage = user.photoURL ? user.photoURL : userLocal.photoURL;
+  const profileImage = user.photoURL 
+  // ? user.photoURL : userLocal.photoURL;
   const [active, setActive] = useState(false);
-  console.log(profileImage);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -50,8 +51,8 @@ function Navbar() {
   };
   return (
     <header>
-      <nav className="bg-[#AAD1A6]  w-screen flex flex-col items-center">
-        <div className="p-5 flex justify-between w-screen items-center lg:w-[1400px]">
+      <nav className="bg-[#AAD1A6]  flex flex-col items-center w-screen">
+        <div className="p-5 flex justify-between  items-center w-4/5 lg:w-[1292px]">
           <div className="ml-4 flex">
             <p className="text-2xl font-semibold text-white">
               <Link to="/">MehBlog</Link>
@@ -65,7 +66,7 @@ function Navbar() {
             /> */}
           </div>
           <div className="mr-4">
-            {(user.signIn || userLocal.signIn) ? (
+            {user.signIn? (
               <div className="flex justify-center">
                 <div className="flex justify-center items-center">
                   <button
@@ -90,8 +91,9 @@ function Navbar() {
                   </Button>
                   <p className="text-white hidden lg:inline-flex">
                     {user.displayName
-                      ? user.displayName
-                      : userLocal.displayName}
+                      // ? user.displayName
+                        // : userLocal.displayName
+                    }
                   </p>
                   <Menu
                     id="demo-positioned-menu"
@@ -123,7 +125,7 @@ function Navbar() {
                         fetch("https://mehblog.herokuapp.com/myblog", {
                           method: "POST",
                           headers: { "Content-type": "application/json" },
-                          body: JSON.stringify(userLocal),
+                          body: JSON.stringify(user),
                         })
                           .then((res) => res.json())
                           .then((data) => console.log(data));
