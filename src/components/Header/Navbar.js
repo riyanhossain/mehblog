@@ -49,6 +49,7 @@ function Navbar() {
   const routeChange = (route) => {
     navigate(route);
   };
+  console.log(user)
   return (
     <header>
       <nav className="bg-[#AAD1A6]  flex flex-col items-center w-screen">
@@ -75,6 +76,17 @@ function Navbar() {
                   >
                     Create Blog
                   </button>
+                  {
+                    user.role === 'admin' ? (
+                      <button
+                      className="hidden p-2 bg-yellow-500 rounded border-0 pl-2 pr-2 mr-2 text-white lg:inline-flex"
+                      onClick={() => navigate("/dashboard")}
+                      >
+                      Dashboard
+                    </button>
+                    ):<p></p>
+                  }
+
                   <Button
                     id="demo-positioned-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}

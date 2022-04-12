@@ -55,6 +55,14 @@ function Login() {
   .then((userCredential) => {
     // Signed in 
     const user1 = userCredential.user;
+    let role;
+    if(user1.email==='deafault@admin.com')
+    {
+      role = 'admin'
+    }else {
+      role='user'
+    }
+    setUser({ ...user1, signIn: true, role: role });
     navigate("/");
     // ...
   })

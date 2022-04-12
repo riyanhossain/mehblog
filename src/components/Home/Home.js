@@ -10,13 +10,33 @@ function Home() {
       .then((data) => {
         setArticles(data);
       });
-  });
+  },[]);
+  //shuffle the articles
+  const shuffle = (array) => {
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+  const articlesShuffled = shuffle(articles);
   return (
     <Fragment>
       <div className="flex justify-center items-center">
         <div className=" flex flex-col justify-center items-center gap-y-6 mt-6">
-          {[...articles]
-            .reverse()
+          {[...articlesShuffled]
             .slice(0, 10)
             .map((item) => (
               <div className="w-[350px] lg:w-[800px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm">
