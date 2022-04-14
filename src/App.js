@@ -14,6 +14,8 @@ import Blockchain from "./components/Categories/Blockchain";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Footer from "./components/Footer/Footer";
 import Myblogs from "./components/MyBlogs/Myblogs";
+import Dashboard from "./components/Dashboard/Dashboard";
+
 
 export const UserContext = createContext();
 function App() {
@@ -38,6 +40,7 @@ function App() {
             <Route path="/*" element={<PrivateRoute />} >
               <Route path="createblog" element={<Createblog />} />
               <Route path="myblogs" element={<Myblogs/>} />
+              <Route path="dashboard" element={<Dashboard/>} />
             </Route>
 
           </Routes>

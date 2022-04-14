@@ -55,14 +55,19 @@ function Login() {
   .then((userCredential) => {
     // Signed in 
     const user1 = userCredential.user;
+    console.log(user1);
     let role;
-    if(user1.email==='deafault@admin.com')
+    if(user1.email==='default@admin.com')
     {
       role = 'admin'
     }else {
       role='user'
     }
+    if(user1.photoURL=== null){
+      user1.photoURL = 'https://source.unsplash.com/RjCo6j0BkU8'
+    }
     setUser({ ...user1, signIn: true, role: role });
+    localStorage.setItem("user", JSON.stringify({ ...user1, signIn: true, role: role, displayName: user1.displayName, photoURL: user1.photoURL }));
     navigate("/");
     // ...
   })

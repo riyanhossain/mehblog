@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import NoArticles from '../images/no-articles.jpg'
 
 function Myblogs() {
   const [user, setUser] = useContext(UserContext);
@@ -13,14 +14,14 @@ function Myblogs() {
       .then((data) => {
         setArticles(data);
       });
-  });
+  },[]);
   //post
 
   return (
     <section>
       <div className="container flex justify-center items-center">
         <div className="w-4/5 flex flex-col justify-center items-center gap-y-6 mt-6">
-          {[...articles].reverse().map((item) => (
+          {articles.length !== 0 ? [...articles].reverse().map((item) => (
             <div className="w-[350px] lg:w-[700px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm">
               <div className=" flex justify-center">
                 <img
@@ -46,7 +47,10 @@ function Myblogs() {
                 </p>
               </div>
             </div>
-          ))}
+          )):<div>
+            <p className="font-bold">No articles</p>
+            <img src={NoArticles} alt="helo" />
+            </div>}
         </div>
       </div>
     </section>

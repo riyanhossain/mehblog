@@ -33,7 +33,7 @@ function Navbar() {
   };
   // const userLocal = JSON.parse(localStorage.getItem("user")) || {};
 
-  const profileImage = user.photoURL 
+  const profileImage = user.photoURL
   // ? user.photoURL : userLocal.photoURL;
   const [active, setActive] = useState(false);
 
@@ -77,14 +77,14 @@ function Navbar() {
                     Create Blog
                   </button>
                   {
-                    user.role === 'admin' ? (
+                    user.role === 'admin' && 
                       <button
                       className="hidden p-2 bg-yellow-500 rounded border-0 pl-2 pr-2 mr-2 text-white lg:inline-flex"
                       onClick={() => navigate("/dashboard")}
                       >
                       Dashboard
                     </button>
-                    ):<p></p>
+                    
                   }
 
                   <Button
