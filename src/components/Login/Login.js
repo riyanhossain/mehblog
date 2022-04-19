@@ -60,11 +60,10 @@ function Login() {
     if(user1.email==='default@admin.com')
     {
       role = 'admin'
+      user1.displayName = 'Admin'
+      user1.photoURL = 'https://source.unsplash.com/RjCo6j0BkU8'
     }else {
       role='user'
-    }
-    if(user1.photoURL=== null){
-      user1.photoURL = 'https://source.unsplash.com/RjCo6j0BkU8'
     }
     setUser({ ...user1, signIn: true, role: role });
     localStorage.setItem("user", JSON.stringify({ ...user1, signIn: true, role: role, displayName: user1.displayName, photoURL: user1.photoURL }));

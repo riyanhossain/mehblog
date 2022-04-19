@@ -24,7 +24,7 @@ function Createblog() {
   const handleSubmit = (e) => {
     e.preventDefault();
       //post
-        fetch('https://mehblog.herokuapp.com/blog', {
+        fetch('http://localhost:5000/blog', {
           method: 'POST',
           headers: {'Content-type' : 'application/json'},
           body : JSON.stringify(blog)

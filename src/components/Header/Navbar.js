@@ -49,11 +49,10 @@ function Navbar() {
   const routeChange = (route) => {
     navigate(route);
   };
-  console.log(user)
   return (
     <header>
       <nav className="bg-[#AAD1A6]  flex flex-col items-center w-screen">
-        <div className="p-5 flex justify-between  items-center w-4/5 lg:w-[1292px]">
+        <div className="p-5 flex justify-between  items-center w-full lg:w-[1292px]">
           <div className="ml-4 flex">
             <p className="text-2xl font-semibold text-white">
               <Link to="/">MehBlog</Link>
@@ -134,7 +133,7 @@ function Navbar() {
                       onClick={() => {
                         handleClose();
                         routeChange("/myblogs");
-                        fetch("https://mehblog.herokuapp.com/myblog", {
+                        fetch("http://localhost:5000/myblog", {
                           method: "POST",
                           headers: { "Content-type": "application/json" },
                           body: JSON.stringify(user),

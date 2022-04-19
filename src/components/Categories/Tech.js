@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import NoArticles from '../images/no-articles.jpg'
 
 function Tech() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("https://mehblog.herokuapp.com/tech")
+    fetch("http://localhost:5000/tech")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -15,7 +16,7 @@ function Tech() {
     <section>
       <div className="container flex justify-center items-center">
         <div className="w-4/5 flex flex-col justify-center items-center gap-y-6 mt-6">
-          {[...articles].reverse().map((item) => (
+          {articles.length !== 0 ? [...articles].reverse().map((item) => (
             <div className="w-[350px] lg:w-[700px] bg-gray-200 flex flex-col justify-center items-center shadow-lg rounded-sm">
               <div className=" flex justify-center">
                 <img
@@ -41,7 +42,10 @@ function Tech() {
                 </p>
               </div>
             </div>
-          ))}
+          )):<div className="flex flex-col justify-center items-center">
+          <p className="font-bold">No articles found</p>
+          <img src={NoArticles} alt="helo" className="w-96 h-96" />
+          </div>}
         </div>
       </div>
     </section>
