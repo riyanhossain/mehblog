@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function Article() {
+function DashArticle() {
   const [article, setArticle] = useState([]);
   let { id } = useParams();
   useEffect(() => {
@@ -104,4 +104,4 @@ function Article() {
   );
 }
 
-export default Article;
+export default DashArticle;

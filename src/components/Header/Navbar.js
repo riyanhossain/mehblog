@@ -12,11 +12,10 @@ import { getAuth, signOut } from "firebase/auth";
 function Navbar() {
   const app = initializeApp(firebaseConfig);
   let navigate = useNavigate();
-  const [user, setUser] = useContext(UserContext);
+  const [user, setUser, dtoggle, setDtoggle] = useContext(UserContext);
 
   const handleSignOut = () => {
-
-    console.log(user)
+    console.log(user);
     const auth = getAuth(app);
     signOut(auth)
       .then(() => {
@@ -33,7 +32,7 @@ function Navbar() {
   };
   // const userLocal = JSON.parse(localStorage.getItem("user")) || {};
 
-  const profileImage = user.photoURL
+  const profileImage = user.photoURL;
   // ? user.photoURL : userLocal.photoURL;
   const [active, setActive] = useState(false);
 
@@ -66,7 +65,7 @@ function Navbar() {
             /> */}
           </div>
           <div className="mr-4">
-            {user.signIn? (
+            {user.signIn ? (
               <div className="flex justify-center">
                 <div className="flex justify-center items-center">
                   <button
@@ -75,16 +74,17 @@ function Navbar() {
                   >
                     Create Blog
                   </button>
-                  {
-                    user.role === 'admin' && 
-                      <button
+                  {user.role === "admin" && (
+                    <button
                       className="hidden p-2 bg-yellow-500 rounded border-0 pl-2 pr-2 mr-2 text-white lg:inline-flex"
-                      onClick={() => navigate("/dashboard")}
-                      >
+                      onClick={() => {
+                        navigate("/dashboard");
+                        setDtoggle(!dtoggle);
+                      }}
+                    >
                       Dashboard
                     </button>
-                    
-                  }
+                  )}
 
                   <Button
                     id="demo-positioned-button"
@@ -101,9 +101,10 @@ function Navbar() {
                     />
                   </Button>
                   <p className="text-white hidden lg:inline-flex">
-                    {user.displayName
+                    {
+                      user.displayName
                       // ? user.displayName
-                        // : userLocal.displayName
+                      // : userLocal.displayName
                     }
                   </p>
                   <Menu

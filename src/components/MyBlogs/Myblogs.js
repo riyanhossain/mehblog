@@ -31,7 +31,7 @@ function Myblogs() {
       .then((data) => {
         setArticles(data);
       });
-  },[]);
+  }, []);
   //delete article
   const deleteArticle = (id) => {
     fetch(`http://localhost:5000/delete/${id}`, {
@@ -44,44 +44,43 @@ function Myblogs() {
   };
 
   const handleSubmit = (id) => {
-    console.log(id)
+    console.log(id);
     // e.preventDefault();
-    fetch(`http://localhost:5000/updateMyblog/${id}`,{
-      method: 'PATCH',
-      headers: {'Content-type' : 'application/json'},
-      body : JSON.stringify(updateBlog)
+    fetch(`http://localhost:5000/updateMyblog/${id}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(updateBlog),
     })
-    .then(res => {
-      return res.json()
-    }) 
-    .then(data => console.log(data))
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => console.log(data));
 
     // navigate("/myblogs");
     setOpen(false);
-  }
+  };
 
-  const [category, setCategory] =useState({
+  const [category, setCategory] = useState({
     Tech: false,
     Programing: false,
     AI: false,
     ML: false,
     Blockchain: false,
-  })
+  });
   const selectCategory = (category) => {
-    for(let i = 0; i < articles.length; i++){
-      if(articles[i].category === category){
-        setCategory({[articles[i].category]:true})
+    for (let i = 0; i < articles.length; i++) {
+      if (articles[i].category === category) {
+        setCategory({ [articles[i].category]: true });
       }
     }
-
-  }
-  const [updateBlog, setUpdateBlog] = useState([])
+  };
+  const [updateBlog, setUpdateBlog] = useState([]);
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
     value = e.target.value;
     setUpdateBlog({ ...updateBlog, [name]: value });
-  }
+  };
   // const updateBlogg = (id) => {
   //   fetch(`http://localhost:5000/updateMyblog/${id}`,{
   //     method: 'PATCH',
@@ -90,7 +89,7 @@ function Myblogs() {
   // })
   //   .then(res => {
   //     return res.json()
-  //   }) 
+  //   })
   //   .then(data => console.log(data))
   // }
   return (
@@ -126,7 +125,11 @@ function Myblogs() {
                 <div className="flex gap-4">
                   <button
                     className="p-2 px-5 font-semibold text-white bg-green-600 "
-                    onClick={()=>{handleOpen();selectCategory(item.category);setUpdateBlog(item)}}
+                    onClick={() => {
+                      handleOpen();
+                      selectCategory(item.category);
+                      setUpdateBlog(item);
+                    }}
                   >
                     Update
                   </button>
@@ -136,7 +139,7 @@ function Myblogs() {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={style} className='w-screen lg:w-2/4'>
+                    <Box sx={style} className="w-screen lg:w-2/4">
                       <div className="w-full  shadow-md flex flex-col justify-center items-center">
                         <form
                           action="/"
@@ -173,7 +176,7 @@ function Myblogs() {
                             onChange={handleInputs}
                             required
                           />
-                        
+
                           <select
                             name="category"
                             id=""
@@ -185,7 +188,12 @@ function Myblogs() {
                               });
                             }}
                           >
-                            <option type="text" value="Tech" name="category" selected={category.Tech}>
+                            <option
+                              type="text"
+                              value="Tech"
+                              name="category"
+                              selected={category.Tech}
+                            >
                               Tech
                             </option>
                             <option
@@ -193,11 +201,15 @@ function Myblogs() {
                               value="Programing"
                               name="category"
                               selected={category.Programing}
-                             
                             >
                               Programing
                             </option>
-                            <option type="text" value="AI" name="category" selected={category.AI}>
+                            <option
+                              type="text"
+                              value="AI"
+                              name="category"
+                              selected={category.AI}
+                            >
                               AI
                             </option>
 
@@ -206,7 +218,6 @@ function Myblogs() {
                               value="Maching Learning"
                               name="category"
                               selected={category.ML}
-                             
                             >
                               Maching Learning
                             </option>
@@ -216,7 +227,6 @@ function Myblogs() {
                               value="Blockchain"
                               name="category"
                               selected={category.Blockchain}
-                             
                             >
                               Blockchain
                             </option>
