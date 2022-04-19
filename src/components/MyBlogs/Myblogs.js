@@ -31,7 +31,7 @@ function Myblogs() {
       .then((data) => {
         setArticles(data);
       });
-  }, []);
+  });
   //delete article
   const deleteArticle = (id) => {
     fetch(`https://mehblog.herokuapp.com/delete/${id}`, {
@@ -122,9 +122,9 @@ function Myblogs() {
                     </span>
                   </p>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 w-full">
                   <button
-                    className="p-2 px-5 font-semibold text-white bg-green-600 "
+                    className="p-2 px-5 font-semibold text-white bg-green-600 w-1/2"
                     onClick={() => {
                       handleOpen();
                       selectCategory(item.category);
@@ -242,7 +242,7 @@ function Myblogs() {
                     </Box>
                   </Modal>
                   <button
-                    className="p-2 px-5 p-x-6 font-semibold text-white bg-red-600 "
+                    className="p-2 px-5 p-x-6 font-semibold text-white bg-red-600 w-1/2"
                     onClick={() => deleteArticle(item._id)}
                   >
                     Delete

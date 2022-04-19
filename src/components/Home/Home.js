@@ -11,7 +11,7 @@ function Home() {
       .then((data) => {
         setArticles(data);
       });
-  }, []);
+  });
   //shuffle the articles
   const shuffle = (array) => {
     let currentIndex = array.length,
