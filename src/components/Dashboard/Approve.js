@@ -4,7 +4,7 @@ import NoArticles from "../images/no-articles.jpg";
 
 function Approve() {
   const deleteArticle = (id) => {
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -16,7 +16,7 @@ function Approve() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/approval")
+    fetch("https://mehblog.herokuapp.com/approval")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -24,7 +24,7 @@ function Approve() {
   });
 
   const grantApprove = (id) => {
-    fetch(`http://localhost:5000/approve/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/approve/${id}`, {
       method: "PATCH",
     })
       .then((res) => {

@@ -7,7 +7,7 @@ function Blockchain() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blockchain")
+    fetch("https://mehblog.herokuapp.com/blockchain")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

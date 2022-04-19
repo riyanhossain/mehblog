@@ -134,7 +134,7 @@ function Navbar() {
                       onClick={() => {
                         handleClose();
                         routeChange("/myblogs");
-                        fetch("http://localhost:5000/myblog", {
+                        fetch("https://mehblog.herokuapp.com/myblog", {
                           method: "POST",
                           headers: { "Content-type": "application/json" },
                           body: JSON.stringify(user),

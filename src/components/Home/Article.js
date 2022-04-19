@@ -5,7 +5,7 @@ function Article() {
   const [article, setArticle] = useState([]);
   let { id } = useParams();
   useEffect(() => {
-    fetch("http://localhost:5000/article/" + id)
+    fetch("https://mehblog.herokuapp.com/article/" + id)
       .then((res) => res.json())
       .then((data) => {
         setArticle(data);
@@ -31,7 +31,7 @@ function Article() {
     });
     e.preventDefault();
     //update
-    fetch(`http://localhost:5000/updateComments/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/updateComments/${id}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(article),

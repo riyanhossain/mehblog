@@ -4,7 +4,7 @@ import NoArticles from "../images/no-articles.jpg";
 
 function Allarticles() {
   const deleteArticle = (id) => {
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -16,7 +16,7 @@ function Allarticles() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://mehblog.herokuapp.com/blogs")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

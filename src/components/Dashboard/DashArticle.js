@@ -31,7 +31,7 @@ function DashArticle() {
     });
     e.preventDefault();
     //update
-    fetch(`http://localhost:5000/updateComments/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/updateComments/${id}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(article),

@@ -6,7 +6,7 @@ function Home() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://mehblog.herokuapp.com/blogs")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

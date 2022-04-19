@@ -26,7 +26,7 @@ function Myblogs() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/myblogs")
+    fetch("https://mehblog.herokuapp.com/myblogs")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -34,7 +34,7 @@ function Myblogs() {
   }, []);
   //delete article
   const deleteArticle = (id) => {
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -46,7 +46,7 @@ function Myblogs() {
   const handleSubmit = (id) => {
     console.log(id);
     // e.preventDefault();
-    fetch(`http://localhost:5000/updateMyblog/${id}`, {
+    fetch(`https://mehblog.herokuapp.com/updateMyblog/${id}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(updateBlog),

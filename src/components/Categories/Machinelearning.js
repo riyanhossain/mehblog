@@ -7,7 +7,7 @@ function Machinelearning() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/machinelearning")
+    fetch("https://mehblog.herokuapp.com/machinelearning")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

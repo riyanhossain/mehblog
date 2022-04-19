@@ -6,7 +6,7 @@ function AI() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/ai")
+    fetch("https://mehblog.herokuapp.com/ai")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

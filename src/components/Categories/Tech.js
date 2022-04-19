@@ -6,7 +6,7 @@ function Tech() {
   let navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/tech")
+    fetch("https://mehblog.herokuapp.com/tech")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
