@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import NoArticles from "../images/no-articles.jpg";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { IconButton, Stack } from "@mui/material";
+import { PhotoCamera } from "@mui/icons-material";
+import axios from "axios";
+import styled from "@emotion/styled";
 
 function Myblogs() {
   const style = {
@@ -31,7 +33,7 @@ function Myblogs() {
       .then((data) => {
         setArticles(data);
       });
-  });
+  },[]);
   //delete article
   const deleteArticle = (id) => {
     fetch(`https://mehblog.herokuapp.com/delete/${id}`, {
@@ -80,6 +82,7 @@ function Myblogs() {
     name = e.target.name;
     value = e.target.value;
     setUpdateBlog({ ...updateBlog, [name]: value });
+    console.log(updateBlog);
   };
   // const updateBlogg = (id) => {
   //   fetch(`http://localhost:5000/updateMyblog/${id}`,{
@@ -92,6 +95,20 @@ function Myblogs() {
   //   })
   //   .then(data => console.log(data))
   // }
+  const Input = styled("input")({
+    display: "none",
+  });
+  const [selectedImage, setSelectedImage] = useState("");
+  const uploadImage = (e) => {
+    const imageData = new FormData();
+    imageData.append("file", selectedImage);
+    imageData.append("upload_preset", "wslmylxt");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dqdll5wus/image/upload", imageData)
+      .then((res) => {
+        setUpdateBlog({ ...updateBlog, [e.target.name]: res.data.secure_url });
+      });
+  };
   return (
     <section>
       <div className="container flex justify-center items-center">
@@ -149,7 +166,42 @@ function Myblogs() {
                           <p className="font-bold text-xl text-lime-500">
                             Create Blog
                           </p>
-                          <input
+                          <img
+                            src={updateBlog.imageUrl}
+                            alt=""
+                            className="h-72 w-full"
+                          />
+
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={2}
+                            className="w-full bg-gray-200 flex justify-center"
+                          >
+                            <label htmlFor="icon-button-file">
+                              <span className="text-blue-500 font-bold">
+                                Upload Image
+                              </span>
+                              <Input
+                                accept="image/*"
+                                id="icon-button-file"
+                                type="file"
+                                name="imageUrl"
+                                onChange={(e) => {
+                                  setSelectedImage(e.target.files[0]);
+                                  uploadImage(e);
+                                }}
+                              />
+                              <IconButton
+                                color="primary"
+                                aria-label="upload picture"
+                                component="span"
+                              >
+                                <PhotoCamera />
+                              </IconButton>
+                            </label>
+                          </Stack>
+                          {/* <input
                             placeholder="Image URL"
                             type="text"
                             name="imageUrl"
@@ -157,7 +209,7 @@ function Myblogs() {
                             value={updateBlog.imageUrl}
                             onChange={handleInputs}
                             required
-                          />
+                          /> */}
 
                           <input
                             placeholder="Title"
